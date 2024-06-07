@@ -1,0 +1,9 @@
+<div>
+    <h2>Ejercicio Fibonacci</h2>
+    <form (submit)="calcularFibonacci()">
+      <label for="numero">Número:</label>
+      <input type="number" id="numero" [(ngModel)]="numero" name="numero" required>
+      <button type="submit">Calcular</button>
+    </form>
+    <p *ngIf="resultado !== undefined">Resultado: {{ resultado }}</p>
+</div>
