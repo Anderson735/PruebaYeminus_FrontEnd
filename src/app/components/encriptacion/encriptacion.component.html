@@ -1,1 +1,15 @@
-<p>encriptacion works!</p>
+<div>
+    <h2>Encriptación y Desencriptación</h2>
+    
+    <label for="textoAEncriptar">Texto a Encriptar:</label>
+    <input type="text" id="textoAEncriptar" [(ngModel)]="textoAEncriptar" name="textoAEncriptar" required>
+    <button type="button" (click)="encriptarTexto()">Encriptar</button>
+    <p *ngIf="resultadoEncriptado !== undefined">Resultado: {{ resultadoEncriptado }}</p>
+  
+    <label for="textoEncriptado">Texto a Desencriptar:</label>
+    <input type="text" id="textoEncriptado" [(ngModel)]="textoEncriptado" name="textoEncriptado" readonly>
+  
+    <button type="button" (click)="desencriptarTexto()">Desencriptar</button>
+    <p *ngIf="resultadoDesencriptado !== undefined">Resultado: {{ resultadoDesencriptado }}</p>
+  
+</div>

@@ -1,24 +1,30 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { EjerciciosService } from '../../Services/ejercicios.service';
-import { FormsModule } from '@angular/forms'; // Importa FormsModule
 
 @Component({
   selector: 'app-fibonacci',
   standalone: true,
-  imports: [    
-    FormsModule ],
+  imports: [CommonModule, FormsModule, HttpClientModule], // Importa HttpClientModule
   templateUrl: './fibonacci.component.html',
-  styleUrl: './fibonacci.component.css'
+  styleUrls: ['./fibonacci.component.css'],
+  providers: [EjerciciosService] // Proveedor del servicio
 })
 export class FibonacciComponent {
-  numero: any;
-  resultado?: number;
+  numero: number = 0;
+  resultado?: any;
 
   constructor(private ejerciciosService: EjerciciosService) { }
 
-  calcularFibonacci() {
+  validarNumero() {
     this.ejerciciosService.ValidarFibonacci(this.numero).subscribe(res => {
-      this.resultado = res;
+      if (res.esFibonacci === true) {
+        this.resultado = 'El número ingresado si pertenece a la serie de fibonacci '
+      } else {
+        this.resultado = 'El número ingresado no pertenece a la serie de fibonacci '
+      }
     });
   }
 }

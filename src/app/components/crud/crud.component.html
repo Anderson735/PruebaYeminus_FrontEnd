@@ -1,1 +1,84 @@
-<p>crud works!</p>
+<div class="crud-container">
+    <h2>CRUD de Productos</h2>
+    
+    <form (submit)="guardarProducto()" class="crud-form">
+      <mat-form-field appearance="fill">
+        <mat-label>Código</mat-label>
+        <input matInput type="text" id="codigo" [(ngModel)]="producto.Codigo" name="codigo" required>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Descripción</mat-label>
+        <input matInput type="text" id="descripcion" [(ngModel)]="producto.Descripcion" name="descripcion" required>
+      </mat-form-field>
+  
+      <mat-label>Lista de Precios</mat-label>
+      <div *ngFor="let precio of producto.ListaDePrecios; let i = index" class="precio-container">
+        <mat-form-field appearance="fill">
+          <input matInput type="number" [(ngModel)]="producto.ListaDePrecios[i]" name="precio-{{i}}" required>
+        </mat-form-field>
+        <button mat-icon-button color="warn" (click)="eliminarPrecio(i)">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+      <div class="nuevo-precio-container">
+        <mat-form-field appearance="fill">
+          <input matInput type="number" [(ngModel)]="nuevoPrecio" name="nuevoPrecio">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="button" (click)="agregarPrecio()">Agregar Precio</button>
+      </div>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Imagen</mat-label>
+        <input matInput type="text" id="imagen" [(ngModel)]="producto.Imagen" name="imagen">
+      </mat-form-field>
+  
+      <mat-checkbox [(ngModel)]="producto.ProductoParaLaVenta" name="productoParaLaVenta">Producto Para La Venta</mat-checkbox>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Porcentaje IVA</mat-label>
+        <input matInput type="number" id="porcentajeIva" [(ngModel)]="producto.PorcentajeIva" name="porcentajeIva" required>
+      </mat-form-field>
+  
+      <button mat-raised-button color="primary" type="submit">Guardar</button>
+    </form>
+
+
+  <div>
+    <h2>Productos</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Código</th>
+          <th>Descripción</th>
+          <th>Lista de Precios</th>
+          <th>Imagen</th>
+          <th>Producto para la Venta</th>
+          <th>Porcentaje IVA</th>
+          <th>Acciones</th> <!-- Añadimos una columna para las acciones -->
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let producto of productos">
+          <td>{{ producto.Codigo}}</td>
+          <td>{{ producto.Descripcion }}</td>
+          <td>
+            <ul>
+              <li *ngFor="let precio of producto.ListaDePrecios">{{ precio }}</li>
+            </ul>
+          </td>
+          <td>
+            <img [src]="producto.Imagen" alt="Imagen del producto" height="50">
+          </td>
+          <td>{{ producto.ProductoParaLaVenta ? 'Sí' : 'No' }}</td>
+          <td>{{ producto.PorcentajeIva }}</td>
+          <td>
+            <!-- Añadimos botones para editar y eliminar -->
+            <button (click)="editarProducto(producto)">Editar</button>
+            <button (click)="eliminarProducto(producto.Codigo)">Eliminar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

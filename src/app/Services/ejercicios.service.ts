@@ -15,15 +15,15 @@ export class EjerciciosService {
   private apiUrl:string = this.endPoint + 'api/ejercicios/';
   constructor(private http:HttpClient) { }
 
-  EncripartarPalabra(palabra:string):Observable<string>{
-    return this.http.post<string>(`${this.apiUrl}EncriptarPalabra`,palabra)
+  EncripartarPalabra(palabra:string):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}EncriptarPalabra`,palabra)
   };
 
-  DesencripartarPalabra(palabra:string):Observable<string>{
-    return this.http.post<string>(`${this.apiUrl}DesencriptarPalabra`,palabra)
+  DesencripartarPalabra(palabra:string):Observable<any>{
+    return this.http.post<any>(`${this.apiUrl}DesencriptarPalabra`,palabra)
   };
 
-  ValidarFibonacci(numero:number):Observable<number>{
-    return this.http.post<number>(`${this.apiUrl}ValidarNumero`,numero)
+  ValidarFibonacci(numero: number): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}ValidarNumero`, { numero }); // Envía un objeto con la propiedad numero
   }
 }
